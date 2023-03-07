@@ -46,13 +46,6 @@
   <li>Data Interval: <span id="Accelerometer_i">0</span><span> ms</span></li>
 </ul>
 
-<h4>Distance</h4>
-<ul>
-  <li>Distance_x: <span id="Distance_x">0</span><span> m</span></li>
-  <li>Distance_y: <span id="Distance_y">0</span><span> m</span></li>
-  <li>Distance_z: <span id="Distance_z">0</span><span> m</span></li>
-</ul>
-
 <h4>Accelerometer including gravity</h4>
 
 <ul>
@@ -110,47 +103,9 @@ function handleMotion(event) {
   updateFieldIfNotNull('Gyroscope_x', event.rotationRate.beta);
   updateFieldIfNotNull('Gyroscope_y', event.rotationRate.gamma);
 
-  updateFieldIfNotNull('Distance_x', distance_X);
-  updateFieldIfNotNull('Distance_y', distance_Y);
-  updateFieldIfNotNull('Distance_z', distance_Z);
-
-  updateFieldIfNotNull('Angle_x', Angulardistance_X);
-  updateFieldIfNotNull('Angle_y', Angulardistance_Y);
-  updateFieldIfNotNull('Angle_z', Angulardistance_Z);  
-
   incrementEventCount();
 }
 
-// ====================================================================================
-
-var distance_X = 0
-var distance_Y = 0
-var distance_Z = 0
-
-var velocity_X = 0
-var velocity_Y = 0
-var velocity_Z = 0
-
-
-function update_acceleration(event) {
-
-    var acceleration = event.acceleration;
-
-    velocity_X = velocity_X + acceleration.x
-    distance_X = distance_X + velocity_X
-
-    velocity_Y = velocity_Y + acceleration.y
-    distance_Y = distance_Y + velocity_Y
-
-    velocity_Z = velocity_Z + acceleration.z
-    distance_Z = distance_Z + velocity_Z
-    return distance_X, distance_Y, distance_Z
-}
-
-distance_X, distance_Y, distance_Z = update_acceleration(event)
-
-
-// ====================================================================================
 
 let is_running = false;
 let demo_button = document.getElementById("start_demo");
