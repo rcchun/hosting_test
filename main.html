@@ -111,6 +111,9 @@ function handleMotion(event) {
 }
 
 var VelocityCount = 0;
+var {KalmanFilter} = kalmanFilter;
+var kf = new KalmanFilter();
+
 function update_acceleration(event) {
   let Velocity_x = document.getElementById("velocity_X")
   if (event.acceleration.x < -0.5 || event.acceleration.x > 0.5) {
