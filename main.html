@@ -119,7 +119,7 @@ function update_acceleration(event) {
   if (event.acceleration.x < -0.5 || event.acceleration.x > 0.5) {
     VelocityCount += event.acceleration.x;
   } else {
-    VelocityCount += 0;
+    VelocityCount = 0;
   }
   
   Velocity_x.innerHTML = VelocityCount;
