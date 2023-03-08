@@ -29,8 +29,8 @@
 <div class="p-3 mb-2 bg-secondary" id="demo-div">
 <a id="start_demo" class="btn btn-lg btn-success py-1" href="#" role="button">Start the demo</a>
 <p style="margin-top:1rem;">Num. of datapoints: <span class="badge badge-warning" id="num-observed-events">0</span></p>
-<p style="margin-top:1rem;">X-Velocity_1: <span class="badge badge-warning" id="velocity_X">0</span></p>
-<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">X-Velocity_0: <span class="badge badge-warning" id="velocity_X">0</span></p>
+<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
 
 <h4 style="margin-top:0.75rem;">Orientation</h4>
 <ul>
@@ -119,14 +119,14 @@ function update_acceleration(event) {
   let Distance_x = document.getElementById("distance_X")
   let filtered_accX = kf.filter(event.acceleration.x)
   if (filtered_accX < -0.3 || filtered_accX > 0.3) {
-    VelocityCount += filtered_accX;
+    VelocityCount += (filtered_accX * 0.00002);
   } else {
     VelocityCount = 0;
   }
   Velocity_x.innerHTML = VelocityCount;
   
-  if (VelocityCount < -0.1 || VelocityCount > 0.1) {
-    DistanceCount += VelocityCount;
+  if (VelocityCount < -0.3 || VelocityCount > 0.3) {
+    DistanceCount += (VelocityCount * 0.00002);
   } else {
     DistanceCount += 0;
   }
