@@ -43,7 +43,7 @@
   <li>X-axis: <span id="Accelerometer_x">0</span><span> m/s<sup>2</sup></span></li>
   <li>Y-axis: <span id="Accelerometer_y">0</span><span> m/s<sup>2</sup></span></li>
   <li>Z-axis: <span id="Accelerometer_z">0</span><span> m/s<sup>2</sup></span></li>
-  <li>X-axis: <span id="Velocity_x">0</span><span> m/s</span></li>
+  <li>X-distance: <span id="Distance_x">0</span><span> m</span></li>
   <li>Data Interval: <span id="Accelerometer_i">0</span><span> ms</span></li>
 </ul>
 
@@ -82,7 +82,7 @@ function handleOrientation(event) {
 function incrementEventCount(){
   let counterElement = document.getElementById("num-observed-events")
   let eventCount = parseInt(counterElement.innerHTML)
-  counterElement.innerHTML = eventCount + 1000;
+  counterElement.innerHTML = eventCount + 1;
 }
 
 function updateFieldIfNotNull(fieldName, value, precision=10){
@@ -98,7 +98,6 @@ function handleMotion(event) {
   updateFieldIfNotNull('Accelerometer_x', event.acceleration.x);
   updateFieldIfNotNull('Accelerometer_y', event.acceleration.y);
   updateFieldIfNotNull('Accelerometer_z', event.acceleration.z);
-  updateFieldIfNotNull('Velocity_x', event.acceleration.x + event.acceleration.y);
   updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
 
   updateFieldIfNotNull('Gyroscope_z', event.rotationRate.alpha);
@@ -108,7 +107,16 @@ function handleMotion(event) {
   incrementEventCount();
 }
 
-
+function update_acceleration(event) {
+  var distance_X
+  var velocity_X
+  velocity_X = velocity_X + acceleration.x
+  distance_X = distance_X + velocity_X
+  updateFieldIfNotNull('Distance_x', distance_X);
+  
+  incrementEventCount();
+}
+  
 let is_running = false;
 let demo_button = document.getElementById("start_demo");
 demo_button.onclick = function(e) {
