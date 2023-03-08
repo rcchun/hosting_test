@@ -113,11 +113,12 @@ function handleMotion(event) {
 var VelocityCount = 0;
 function update_acceleration(event) {
   let Velocity_x = document.getElementById("velocity_X")
-  if (event.acceleration.x > 0.5) {
+  if (event.acceleration.x > 0.5 && event.acceleration.x < -0.5) {
     VelocityCount += event.acceleration.x;
   } else {
     VelocityCount += 0;
   }
+  
   Velocity_x.innerHTML = VelocityCount;
 }
   
