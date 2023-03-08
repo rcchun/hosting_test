@@ -91,8 +91,7 @@ function updateFieldIfNotNull(fieldName, value, precision=10){
 }
 
 function handleMotion(event) {
-  var accel_x = event.acceleration.x;
-  var velo_x += accel_x;
+  var velo_x += event.acceleration.x;
   var distance_x += velo_x;
   let Velocity_x = document.getElementById("velocity_X");
   let Distance_x = document.getElementById("distance_X");
