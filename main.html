@@ -29,8 +29,8 @@
 <div class="p-3 mb-2 bg-secondary" id="demo-div">
 <a id="start_demo" class="btn btn-lg btn-success py-1" href="#" role="button">Start the demo</a>
 <p style="margin-top:1rem;">Num. of datapoints: <span class="badge badge-warning" id="num-observed-events">0</span></p>
-<p style="margin-top:1rem;">X-Velocity_0: <span class="badge badge-warning" id="velocity_X">0</span></p>
-<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">X-Velocity_1: <span class="badge badge-warning" id="velocity_X">0</span></p>
+<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
 
 <h4 style="margin-top:0.75rem;">Orientation</h4>
 <ul>
@@ -124,7 +124,12 @@ function update_acceleration(event) {
     VelocityCount = 0;
   }
   Velocity_x.innerHTML = VelocityCount;
-  DistanceCount += VelocityCount;
+  
+  if (VelocityCount < -0.5 || VelocityCount > 0.5) {
+    DistanceCount += VelocityCount;
+  } else {
+    DistanceCount += 0;
+  }
   Distance_x.innerHTML = DistanceCount;
 }
   
