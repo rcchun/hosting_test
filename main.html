@@ -107,9 +107,9 @@ function handleMotion(event) {
   incrementEventCount();
 }
 
+var VelocityCount = 0;
 function update_acceleration(event) {
   let Velocity_x = document.getElementById("velocity_X")
-  let VelocityCount = parseInt(Velocity_x.innerHTML)
   VelocityCount += event.acceleration.x;
   Velocity_x.innerHTML = VelocityCount;
 }
