@@ -107,9 +107,10 @@ function handleMotion(event) {
   incrementEventCount();
 }
 
+var distance_X = 0;
+var velocity_X = 0;
+
 function update_acceleration(event) {
-  var distance_X
-  var velocity_X
   velocity_X = velocity_X + event.acceleration.x
   distance_X = distance_X + velocity_X
   updateFieldIfNotNull('Distance_x', distance_X);
