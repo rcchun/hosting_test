@@ -90,15 +90,7 @@ function updateFieldIfNotNull(fieldName, value, precision=10){
     document.getElementById(fieldName).innerHTML = value.toFixed(precision);
 }
 
-function handleMotion(event) {
-  let velo_x += event.acceleration.x;
-  let distance_x += velo_x;
-  let Velocity_x = document.getElementById("velocity_X");
-  let Distance_x = document.getElementById("distance_X");
-  
-  Velocity_x.innerHTML = velo_x;
-  Distance_x.innerHTML = distance_x;
-  
+function handleMotion(event) {  
   updateFieldIfNotNull('Accelerometer_gx', event.accelerationIncludingGravity.x);
   updateFieldIfNotNull('Accelerometer_gy', event.accelerationIncludingGravity.y);
   updateFieldIfNotNull('Accelerometer_gz', event.accelerationIncludingGravity.z);
@@ -111,10 +103,15 @@ function handleMotion(event) {
   updateFieldIfNotNull('Gyroscope_z', event.rotationRate.alpha);
   updateFieldIfNotNull('Gyroscope_x', event.rotationRate.beta);
   updateFieldIfNotNull('Gyroscope_y', event.rotationRate.gamma);
-
+  update_acceleration(event);
   incrementEventCount();
 }
 
+function update_acceleration(event) {
+  let Velocity_x = document.getElementById("velocity_X")
+  let VelocityCount = parseInt(Velocity_x.innerHTML)
+  Velocity_x.innerHTML = VelocityCount + event.acceleration.x;
+}
   
 let is_running = false;
 let demo_button = document.getElementById("start_demo");
