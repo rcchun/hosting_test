@@ -29,6 +29,7 @@
 <div class="p-3 mb-2 bg-secondary" id="demo-div">
 <a id="start_demo" class="btn btn-lg btn-success py-1" href="#" role="button">Start the demo</a>
 <p style="margin-top:1rem;">Num. of datapoints: <span class="badge badge-warning" id="num-observed-events">0</span></p>
+<p style="margin-top:1rem;">X-Velocity: <span class="badge badge-warning" id="velocity_X">0</span></p>
 <p style="margin-top:1rem;">X-Distance: <span class="badge badge-warning" id="distance_X">0</span></p>
 
 <h4 style="margin-top:0.75rem;">Orientation</h4>
@@ -108,9 +109,12 @@ function handleMotion(event) {
 
 
 function update_acceleration(event) {
+  let Velocity_x = document.getElementById("velocity_X")
+  let VelocityCount = parseInt(Velocity_x.innerHTML)
   let Distance_x = document.getElementById("distance_X")
-  let eventCount = parseInt(Distance_x.innerHTML)
-  Distance_x.innerHTML = eventCount + event.acceleration.x;
+  let DistanceCount = parseInt(Distance_x.innerHTML)
+  Velocity_x.innerHTML = VelocityCount + event.acceleration.x;
+  Distance_x.innerHTML = DistanceCount + Velocity_x.innerHTML;
 }
   
 let is_running = false;
