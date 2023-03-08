@@ -118,14 +118,14 @@ function update_acceleration(event) {
   let Velocity_x = document.getElementById("velocity_X")
   let Distance_x = document.getElementById("distance_X")
   let filtered_accX = kf.filter(event.acceleration.x)
-  if (filtered_accX < -0.5 || filtered_accX > 0.5) {
+  if (filtered_accX < -0.3 || filtered_accX > 0.3) {
     VelocityCount += filtered_accX;
   } else {
     VelocityCount = 0;
   }
   Velocity_x.innerHTML = VelocityCount;
   
-  if (VelocityCount < -0.5 || VelocityCount > 0.5) {
+  if (VelocityCount < -0.1 || VelocityCount > 0.1) {
     DistanceCount += VelocityCount;
   } else {
     DistanceCount += 0;
