@@ -103,7 +103,8 @@ function handleMotion(event) {
   updateFieldIfNotNull('Gyroscope_z', event.rotationRate.alpha);
   updateFieldIfNotNull('Gyroscope_x', event.rotationRate.beta);
   updateFieldIfNotNull('Gyroscope_y', event.rotationRate.gamma);
-  update_acceleration(event);
+  Velocity_x = update_acceleration(event);
+  update_velocity(Velocity_x);
   incrementEventCount();
 }
 
@@ -111,10 +112,14 @@ function handleMotion(event) {
 function update_acceleration(event) {
   let Velocity_x = document.getElementById("velocity_X")
   let VelocityCount = parseInt(Velocity_x.innerHTML)
+  Velocity_x.innerHTML = VelocityCount + event.acceleration.x;
+  return Velocity_x.innerHTML;
+}
+  
+function update_velocity(Velocity_x) {
   let Distance_x = document.getElementById("distance_X")
   let DistanceCount = parseInt(Distance_x.innerHTML)
-  Velocity_x.innerHTML = VelocityCount + event.acceleration.x;
-  Distance_x.innerHTML = DistanceCount + Velocity_x.innerHTML;
+  Distance_x.innerHTML = DistanceCount + Velocity_x;
 }
   
 let is_running = false;
