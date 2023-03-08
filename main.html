@@ -30,6 +30,7 @@
 <a id="start_demo" class="btn btn-lg btn-success py-1" href="#" role="button">Start the demo</a>
 <p style="margin-top:1rem;">Num. of datapoints: <span class="badge badge-warning" id="num-observed-events">0</span></p>
 <p style="margin-top:1rem;">X-Velocity_1: <span class="badge badge-warning" id="velocity_X">0</span></p>
+<p style="margin-top:1rem;">X-Velocity_2: <span class="badge badge-warning" id="velocity_X2">0</span></p>
 
 
 <h4 style="margin-top:0.75rem;">Orientation</h4>
@@ -70,6 +71,9 @@
     <a href="https://help.github.com/articles/github-privacy-statement/">here</a>.</span>
   </div>
 </footer>
+  
+<script src="kalman-filter.min.js"></script>
+  
 <script>
 
 function handleOrientation(event) {
@@ -108,10 +112,18 @@ function handleMotion(event) {
 }
 
 var VelocityCount = 0;
+var VelocityCount2 = 0;
+var {KalmanFilter} = kalmanFilter;
+const kFilter = new KalmanFilter();
+
 function update_acceleration(event) {
   let Velocity_x = document.getElementById("velocity_X")
+  let Velocity_x2 = document.getElementById("velocity_X2")
+  filtered_accX = kFilter.filterAll(event.acceleration.x);
   VelocityCount += event.acceleration.x;
+  VelocityCount2 += filtered_accX;
   Velocity_x.innerHTML = VelocityCount;
+  Velocity_x2.innerHTML = VelocityCount2;
 }
   
 let is_running = false;
