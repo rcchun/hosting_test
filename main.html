@@ -33,9 +33,9 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">Accel_0: <span class="badge badge-warning" id="Accel">0</span></p>
+<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">Accel_1: <span class="badge badge-warning" id="Accel">0</span></p>
 
   
   
@@ -147,11 +147,9 @@ function update_acceleration(event) {
   let accelX2 = Math.pow(filtered_accX, 2);
   let accelY2 = Math.pow(filtered_accY, 2);
   let accel = accelX2 + accelY2;
-
-  if (Ori_a < 10) {
-    Accel.innerHTML = accel;
-  }
-
+  Accel.innerHTML = event.alpha;
+  
+  
   DistanceCount += VelocityCount;
   DistanceCountY += VelocityCountY;  
   
