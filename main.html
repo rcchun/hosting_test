@@ -30,8 +30,8 @@
 <a id="start_demo" class="btn btn-lg btn-success py-1" href="#" role="button">Start the demo</a>
 <p style="margin-top:1rem;">Num. of datapoints: <span class="badge badge-warning" id="num-observed-events">0</span></p>
 
-<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
 
 <h4 style="margin-top:0.75rem;">Orientation</h4>
 <ul>
@@ -103,7 +103,7 @@ function handleMotion(event) {
   updateFieldIfNotNull('Accelerometer_x', event.acceleration.x);
   updateFieldIfNotNull('Accelerometer_y', event.acceleration.y);
   updateFieldIfNotNull('Accelerometer_z', event.acceleration.z);
-  updateFieldIfNotNull('Accelerometer_i', event.interval, 10);
+  updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
 
   updateFieldIfNotNull('Gyroscope_z', event.rotationRate.alpha);
   updateFieldIfNotNull('Gyroscope_x', event.rotationRate.beta);
@@ -136,25 +136,25 @@ function update_acceleration(event) {
   
   let accel = Math.abs(Math.sprt(Math.pow(filtered_accX, 2) + Math.pow(filtered_accY, 2)));
   if (Ori_g < 10 && Ori_g > 350) {
-    if (accel >= 1) { 
+    if (accel >= 0.2) { 
       VelocityCountY += (accel * 0.6);
     }
   }
     
   if (Ori_g < 250 && Ori_g > 270) {
-    if (accel >= 1) { 
+    if (accel >= 0.2) { 
       VelocityCount += (accel * 0.6);
     }
   }
 
   if (Ori_g < 190 && Ori_g > 170) {
-    if (accel >= 1) { 
+    if (accel >= 0.2) { 
       VelocityCountY -= (accel * 0.6);
     }
   }
   
   if (Ori_g < 100 && Ori_g > 80) {
-    if (accel >= 1) { 
+    if (accel >= 0.2) { 
       VelocityCount -= (accel * 0.6);
     }
   }
