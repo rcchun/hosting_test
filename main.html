@@ -136,25 +136,25 @@ function update_acceleration(event) {
   
   let accel = Math.abs(Math.sprt(Math.pow(filtered_accX, 2) + Math.pow(filtered_accY, 2)));
   if (Ori_g < 10 && Ori_g > 350) {
-    if (accel >= 0.2) { 
+    if (accel >= 0.02) { 
       VelocityCountY += (accel * 0.6);
     }
   }
     
   if (Ori_g < 250 && Ori_g > 270) {
-    if (accel >= 0.2) { 
+    if (accel >= 0.02) { 
       VelocityCount += (accel * 0.6);
     }
   }
 
   if (Ori_g < 190 && Ori_g > 170) {
-    if (accel >= 0.2) { 
+    if (accel >= 0.02) { 
       VelocityCountY -= (accel * 0.6);
     }
   }
   
   if (Ori_g < 100 && Ori_g > 80) {
-    if (accel >= 0.2) { 
+    if (accel >= 0.02) { 
       VelocityCount -= (accel * 0.6);
     }
   }
