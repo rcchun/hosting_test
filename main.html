@@ -142,18 +142,14 @@ function update_acceleration(event) {
   Velocity_x.innerHTML = VelocityCount;
   
   if (filtered_accY < -1 && filtered_accY > -7) {
-    if (Orientation_g > 180 && Orientation_g < 360) {
-      VelocityCountY += (filtered_accY * 0.2);
-    }
+    VelocityCountY += (filtered_accY * 0.2);
   } else {
     VelocityCountY = 0;
   }
   Velocity_y.innerHTML = VelocityCountY;
   
   if (filtered_accY > 1 && filtered_accY < 7) {
-    if (Orientation_g > 0 && Orientation_g < 180) {
-      VelocityCountY += (filtered_accY * 0.2);
-    }
+    VelocityCountY += (filtered_accY * 0.2);
   } else {
     VelocityCountY = 0;
   }
