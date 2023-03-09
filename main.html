@@ -33,9 +33,9 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">Accel_1: <span class="badge badge-warning" id="Accel">0</span></p>
+<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">Accel_0: <span class="badge badge-warning" id="Accel">0</span></p>
 
   
   
@@ -90,7 +90,6 @@ function handleOrientation(event) {
   updateFieldIfNotNull('Orientation_a', event.alpha);
   updateFieldIfNotNull('Orientation_b', event.beta);
   updateFieldIfNotNull('Orientation_g', event.gamma);
-  update_acceleration(event);
   incrementEventCount();
 }
 
@@ -149,7 +148,6 @@ function update_acceleration(event) {
   let accel = accelX2 + accelY2;
   Accel.innerHTML = event.alpha;
   
-  
   DistanceCount += VelocityCount;
   DistanceCountY += VelocityCountY;  
   
@@ -173,7 +171,6 @@ demo_button.onclick = function(e) {
   if (is_running){
     window.removeEventListener("devicemotion", handleMotion);
     window.removeEventListener("deviceorientation", handleOrientation);
-    window.removeEventListener("devicedistance", update_acceleration);
     demo_button.innerHTML = "Start demo";
     demo_button.classList.add('btn-success');
     demo_button.classList.remove('btn-danger');
@@ -181,7 +178,6 @@ demo_button.onclick = function(e) {
   }else{
     window.addEventListener("devicemotion", handleMotion);
     window.addEventListener("deviceorientation", handleOrientation);
-    window.addEventListener("devicedistance", update_acceleration);
     document.getElementById("start_demo").innerHTML = "Stop demo";
     demo_button.classList.remove('btn-success');
     demo_button.classList.add('btn-danger');
