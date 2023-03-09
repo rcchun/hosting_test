@@ -129,6 +129,8 @@ function update_acceleration(event) {
   
   let filtered_accX = kf.filter(event.acceleration.x)
   let filtered_accY = kf.filter(event.acceleration.y)
+  console.log(filtered_accX)
+  console.log(filtered_accY)
   if (filtered_accX < -1 && filtered_accX > -7) {
     VelocityCount += (filtered_accX * 0.2);
   } else {
