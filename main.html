@@ -32,6 +32,7 @@
 
 <p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
 <p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">Accel_1: <span class="badge badge-warning" id="Accel">0</span></p>
 
 <h4 style="margin-top:0.75rem;">Orientation</h4>
 <ul>
@@ -122,6 +123,7 @@ var kf = new KalmanFilter();
 function update_acceleration(event) {
   let Distance_x = document.getElementById("distance_X");
   let Distance_y = document.getElementById("distance_Y");
+  let Accel = document.getElementById("Accel");
   
   let Ori_a = event.alpha;
   let Ori_b = event.beta;
@@ -135,6 +137,7 @@ function update_acceleration(event) {
   let filtered_accY = kf.filter(event.acceleration.y);
   
   let accel = Math.abs(Math.sprt(Math.pow(filtered_accX, 2) + Math.pow(filtered_accY, 2)));
+  Accel.innerHTML = accel;
   if (Ori_g < 10 && Ori_g > 350) {
     if (accel >= 0.02) { 
       VelocityCountY += (accel * 0.6);
