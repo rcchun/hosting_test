@@ -105,7 +105,7 @@ function handleMotion(event) {
   updateFieldIfNotNull('Accelerometer_x', event.acceleration.x);
   updateFieldIfNotNull('Accelerometer_y', event.acceleration.y);
   updateFieldIfNotNull('Accelerometer_z', event.acceleration.z);
-  updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
+  updateFieldIfNotNull('Accelerometer_i', event.interval, 10);
 
   updateFieldIfNotNull('Gyroscope_z', event.rotationRate.alpha);
   updateFieldIfNotNull('Gyroscope_x', event.rotationRate.beta);
@@ -135,6 +135,13 @@ function update_acceleration(event) {
   let filtered_accY = kf.filter(event.acceleration.y)
 
   if (filtered_accX < -1 && filtered_accX > -7) {
+    VelocityCount += (filtered_accX * 0.2);
+  } else {
+    VelocityCount = 0;
+  }
+  Velocity_x.innerHTML = VelocityCount;
+  
+  if (filtered_accX > 1 && filtered_accX < 7) {
     VelocityCount += (filtered_accX * 0.2);
   } else {
     VelocityCount = 0;
