@@ -29,11 +29,11 @@
 <div class="p-3 mb-2 bg-secondary" id="demo-div">
 <a id="start_demo" class="btn btn-lg btn-success py-1" href="#" role="button">Start the demo</a>
 <p style="margin-top:1rem;">Num. of datapoints: <span class="badge badge-warning" id="num-observed-events">0</span></p>
-<p style="margin-top:1rem;">X-Velocity_0: <span class="badge badge-warning" id="velocity_X">0</span></p>
-<p style="margin-top:1rem;">Y-Velocity_0: <span class="badge badge-warning" id="velocity_Y">0</span></p>
+<p style="margin-top:1rem;">X-Velocity_1: <span class="badge badge-warning" id="velocity_X">0</span></p>
+<p style="margin-top:1rem;">Y-Velocity_1: <span class="badge badge-warning" id="velocity_Y">0</span></p>
 
-<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
 
 <h4 style="margin-top:0.75rem;">Orientation</h4>
 <ul>
@@ -127,10 +127,13 @@ function update_acceleration(event) {
   let Velocity_y = document.getElementById("velocity_Y")
   let Distance_y = document.getElementById("distance_Y")  
   
+  let Orientation_a = event.alpha
+  let Orientation_b = event.beta
+  let Orientation_g = event.gamma
+  
   let filtered_accX = kf.filter(event.acceleration.x)
   let filtered_accY = kf.filter(event.acceleration.y)
-  console.log(filtered_accX)
-  console.log(filtered_accY)
+
   if (filtered_accX < -1 && filtered_accX > -7) {
     VelocityCount += (filtered_accX * 0.2);
   } else {
@@ -139,7 +142,18 @@ function update_acceleration(event) {
   Velocity_x.innerHTML = VelocityCount;
   
   if (filtered_accY < -1 && filtered_accY > -7) {
-    VelocityCountY += (filtered_accY * 0.2);
+    if (Orientation_g > 180 && Orientation_g < 360) {
+      VelocityCountY += (filtered_accY * 0.2);
+    }
+  } else {
+    VelocityCountY = 0;
+  }
+  Velocity_y.innerHTML = VelocityCountY;
+  
+  if (filtered_accY > 1 && filtered_accY < 7) {
+    if (Orientation_g > 0 && Orientation_g < 180) {
+      VelocityCountY += (filtered_accY * 0.2);
+    }
   } else {
     VelocityCountY = 0;
   }
