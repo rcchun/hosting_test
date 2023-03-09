@@ -141,26 +141,26 @@ function update_acceleration(event) {
   let accelY2 = Math.pow(filtered_accY, 2);
   let accel = accelX2 + accelY2;
   Accel.innerHTML = accel;
-  if (Ori_g < 10 && Ori_g > 350) {
-    if (accel >= 0.02) { 
+  if (Ori_g < 10 || Ori_g > 350) {
+    if (accel >= 0.5) { 
       VelocityCountY += (accel * 0.6);
     }
   }
     
-  if (Ori_g < 250 && Ori_g > 270) {
-    if (accel >= 0.02) { 
+  if (Ori_g > 250 && Ori_g < 270) {
+    if (accel >= 0.5) { 
       VelocityCount += (accel * 0.6);
     }
   }
 
-  if (Ori_g < 190 && Ori_g > 170) {
-    if (accel >= 0.02) { 
+  if (Ori_g > 170 && Ori_g < 190) {
+    if (accel >= 0.5) { 
       VelocityCountY -= (accel * 0.6);
     }
   }
   
-  if (Ori_g < 100 && Ori_g > 80) {
-    if (accel >= 0.02) { 
+  if (Ori_g > 80 && Ori_g < 100) {
+    if (accel >= 0.5) { 
       VelocityCount -= (accel * 0.6);
     }
   }
