@@ -30,9 +30,9 @@
 <a id="start_demo" class="btn btn-lg btn-success py-1" href="#" role="button">Start the demo</a>
 <p style="margin-top:1rem;">Num. of datapoints: <span class="badge badge-warning" id="num-observed-events">0</span></p>
 
-<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">Accel_1: <span class="badge badge-warning" id="Accel">0</span></p>
+<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">Accel_0: <span class="badge badge-warning" id="Accel">0</span></p>
 
 <h4 style="margin-top:0.75rem;">Orientation</h4>
 <ul>
@@ -141,27 +141,26 @@ function update_acceleration(event) {
   let accelY2 = Math.pow(filtered_accY, 2);
   let accel = accelX2 + accelY2;
   Accel.innerHTML = accel;
-  VelocityCountY += (accel * 0.6);
-  
-  if (Ori_g < 10 || Ori_g > 350) {
+
+  if (Ori_a < 10 || Ori_a > 350) {
     if (accel >= 0.5) { 
       VelocityCountY += (accel * 0.6);
     }
   }
     
-  if (Ori_g > 250 && Ori_g < 270) {
+  if (Ori_a > 250 && Ori_a < 270) {
     if (accel >= 0.5) { 
       VelocityCount += (accel * 0.6);
     }
   }
 
-  if (Ori_g > 170 && Ori_g < 190) {
+  if (Ori_a > 170 && Ori_a < 190) {
     if (accel >= 0.5) { 
       VelocityCountY -= (accel * 0.6);
     }
   }
   
-  if (Ori_g > 80 && Ori_g < 100) {
+  if (Ori_a > 80 && Ori_a < 100) {
     if (accel >= 0.5) { 
       VelocityCount -= (accel * 0.6);
     }
