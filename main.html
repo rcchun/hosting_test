@@ -128,14 +128,18 @@ var DistanceCountY = 0;
 var Alpha_0 = 0;
 var kf = new KalmanFilter();
 
-function update_acceleration(event) {
-  let Distance_x = document.getElementById("distance_X");
-  let Distance_y = document.getElementById("distance_Y");
-  let Alpha = document.getElementById("Alpha");
-
+function update_orientation(event) {
   let Ori_a = event.alpha;
   let Ori_b = event.beta;
   let Ori_g = event.gamma;
+  let Alpha = document.getElementById("Alpha");
+  Alpha.innerHTML = event.alpha
+}
+
+  
+function update_acceleration(event) {
+  let Distance_x = document.getElementById("distance_X");
+  let Distance_y = document.getElementById("distance_Y");
   
   let Gyro_z = event.rotationRate.alpha;
   let Gyro_x = event.rotationRate.beta;
@@ -147,8 +151,6 @@ function update_acceleration(event) {
   let accelX2 = Math.pow(filtered_accX, 2);
   let accelY2 = Math.pow(filtered_accY, 2);
   let accel = accelX2 + accelY2;
-
-  Alpha.innerHTML = event.alpha;
   
   if (filtered_accX < -1 && filtered_accX > -7) {
     VelocityCount += (filtered_accX * 0.6);
