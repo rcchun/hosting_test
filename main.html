@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
 <p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
@@ -147,9 +147,7 @@ function update_orientation(event) {
   Test2.innerHTML = accel;
   
   if (event.alpha < 10 || event.alpha > 350) {
-    if (accel >= 0.5) { 
-      VelocityCountY += (accel * 0.6);
-    }
+    VelocityCountY += (accel * 0.6);
   }
   DistanceCount += VelocityCount;
   DistanceCountY += VelocityCountY;  
