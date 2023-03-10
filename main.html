@@ -174,15 +174,9 @@ function update_acceleration(event) {
 }
 
 function update_orientation(event) {
-  let Distance_x = document.getElementById("distance_X");
-  let Distance_y = document.getElementById("distance_Y");
   let Alpha = document.getElementById("Alpha");
   let Test = document.getElementById("test");  
-  
-  let Ori_a = event.alpha;
-  let Ori_b = event.beta;
-  let Ori_g = event.gamma;  
-  
+
   let filtered_accX = kf.filter(event.acceleration.x);
   let filtered_accY = kf.filter(event.acceleration.y);
   
