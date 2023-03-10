@@ -33,9 +33,9 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">Accel_1: <span class="badge badge-warning" id="Accel">0</span></p>
+<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
 
 
   
@@ -52,7 +52,6 @@
   <li>X-axis: <span id="Accelerometer_x">0</span><span> m/s<sup>2</sup></span></li>
   <li>Y-axis: <span id="Accelerometer_y">0</span><span> m/s<sup>2</sup></span></li>
   <li>Z-axis: <span id="Accelerometer_z">0</span><span> m/s<sup>2</sup></span></li>
-  <li>XY-axis: <span id="Accelerometer_xy">0</span><span> m/s<sup>2</sup></span></li>
   <li>Data Interval: <span id="Accelerometer_i">0</span><span> ms</span></li>
 </ul>
 
@@ -89,7 +88,6 @@ function handleOrientation(event) {
   updateFieldIfNotNull('Orientation_a', event.alpha);
   updateFieldIfNotNull('Orientation_b', event.beta);
   updateFieldIfNotNull('Orientation_g', event.gamma);
-  updateFieldIfNotNull('Accelerometer_xy', event.gamma);
   incrementEventCount();
 }
 
@@ -125,13 +123,14 @@ var VelocityCount = 0;
 var DistanceCount = 0;
 var VelocityCountY = 0;
 var DistanceCountY = 0;
+var Alpha_0 = 0;
 var kf = new KalmanFilter();
 
 function update_acceleration(event) {
   let Distance_x = document.getElementById("distance_X");
   let Distance_y = document.getElementById("distance_Y");
-  let Accel = document.getElementById("Accel");
-  
+  let Alpha = document.getElementById("Alpha");
+
   let Ori_a = event.alpha;
   let Ori_b = event.beta;
   let Ori_g = event.gamma;
@@ -146,7 +145,8 @@ function update_acceleration(event) {
   let accelX2 = Math.pow(filtered_accX, 2);
   let accelY2 = Math.pow(filtered_accY, 2);
   let accel = accelX2 + accelY2;
-  Accel.innerHTML = event.rotationRate.alpha;
+  Alpha_0 += (event.rotationRate.alpha);
+  Alpha.innerHTML = Alpha_0;
   
   if (filtered_accX < -1 && filtered_accX > -7) {
     VelocityCount += (filtered_accX * 0.6);
