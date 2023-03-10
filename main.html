@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
 <p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
@@ -127,52 +127,6 @@ var DistanceCountY = 0;
 var Alpha_0 = 0;
 var kf = new KalmanFilter();
   
-function update_acceleration(event) {
-  let Distance_x = document.getElementById("distance_X");
-  let Distance_y = document.getElementById("distance_Y");
-  
-  let Gyro_z = event.rotationRate.alpha;
-  let Gyro_x = event.rotationRate.beta;
-  let Gyro_y = event.rotationRate.gamma;
-  
-  let filtered_accX = kf.filter(event.acceleration.x);
-  let filtered_accY = kf.filter(event.acceleration.y);
-  
-  let accelX2 = Math.pow(filtered_accX, 2);
-  let accelY2 = Math.pow(filtered_accY, 2);
-  let accel = accelX2 + accelY2;
-  
-  if (filtered_accX < -1 && filtered_accX > -7) {
-    VelocityCount += (filtered_accX * 0.6);
-  } else {
-    VelocityCount = 0;
-  }
-  
-  if (filtered_accX > 1 && filtered_accX < 7) {
-    VelocityCount += (filtered_accX * 0.6);
-  } else {
-    VelocityCount = 0;
-  }
-  
-  if (filtered_accY < -1 && filtered_accY > -7) {
-    VelocityCountY += (filtered_accY * 0.6);
-  } else {
-    VelocityCountY = 0;
-  }
-  
-  if (filtered_accY > 1 && filtered_accY < 7) {
-    VelocityCountY += (filtered_accY * 0.6);
-  } else {
-    VelocityCountY = 0;
-  }
-  
-  DistanceCount += VelocityCount;
-  DistanceCountY += VelocityCountY;  
-  
-  Distance_x.innerHTML = DistanceCount;
-  Distance_y.innerHTML = DistanceCountY;
-}
-
 function update_orientation(event) {
   let Ori_a = event.alpha;
   let Ori_b = event.beta;
@@ -184,15 +138,23 @@ function update_orientation(event) {
   
   let Distance_x = document.getElementById("distance_X");
   let Distance_y = document.getElementById("distance_Y");
-
   let filtered_accX = kf.filter(event.acceleration.x);
   let filtered_accY = kf.filter(event.acceleration.y);
-  
   let accelX2 = Math.pow(filtered_accX, 2);
   let accelY2 = Math.pow(filtered_accY, 2);
   let accel = accelX2 + accelY2;
   let Test2 = document.getElementById("test2");
   Test2.innerHTML = accel;
+  
+  if (event.alpha < 10 || event.alpha > 350) {
+    if (accel >= 0.5) { 
+      VelocityCountY += (accel * 0.6);
+    }
+  }
+  DistanceCount += VelocityCount;
+  DistanceCountY += VelocityCountY;  
+  Distance_x.innerHTML = DistanceCount;
+  Distance_y.innerHTML = DistanceCountY;  
 }
   
 let is_running = false;
