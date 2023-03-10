@@ -128,10 +128,6 @@ var Angle_alpha = 0;
 var kf = new KalmanFilter();
   
 function update_orientation(event) {
-  let Ori_a = event.alpha;
-  let tmp = 10;
-  let Ori_b = event.beta;
-  let Ori_g = event.gamma;
   let Alpha = document.getElementById("Alpha");
   let Test = document.getElementById("test");
   let Alpha2 = parseFloat(event.alpha)
@@ -144,14 +140,15 @@ function update_orientation(event) {
   let filtered_alpha = kf.filter(event.rotationRate.alpha);
   let accelX2 = Math.pow(filtered_accX, 2);
   let accelY2 = Math.pow(filtered_accY, 2);
-  let accel = accelX2 + accelY2;
-  Test.innerHTML = accel;
+  let accel = Math.sqrt(accelX2 + accelY2);
   let Test2 = document.getElementById("test2");
+  Test.innerHTML = accel;
   
-  if (parseFloat(Alpha.innerHTML) > 9.01) {
-    Test2.innerHTML = event.acceleration.x;
+  if (filtered_alpha > 1 || filtered_alpha < -1) {
+    Angle_alpha += filtered_alpha;
   }
-
+  Test2.innerHTML = Angle_alpha;
+  
   if (accel > 1) {
     VelocityCountY += (accel * 0.1);
   } else {
