@@ -37,6 +37,7 @@
 <p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
 <p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
 <p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
   
@@ -116,7 +117,6 @@ function handleMotion(event) {
   updateFieldIfNotNull('Gyroscope_z', event.rotationRate.alpha);
   updateFieldIfNotNull('Gyroscope_x', event.rotationRate.beta);
   updateFieldIfNotNull('Gyroscope_y', event.rotationRate.gamma);
-  update_acceleration(event);
   incrementEventCount();
 }
   
@@ -180,7 +180,19 @@ function update_orientation(event) {
   let Alpha = document.getElementById("Alpha");
   let Test = document.getElementById("test");
   Alpha.innerHTML = event.alpha;
-  Test.innerHTML = event.acceleration.x;  
+  Test.innerHTML = event.acceleration.x;
+  
+  let Distance_x = document.getElementById("distance_X");
+  let Distance_y = document.getElementById("distance_Y");
+
+  let filtered_accX = kf.filter(event.acceleration.x);
+  let filtered_accY = kf.filter(event.acceleration.y);
+  
+  let accelX2 = Math.pow(filtered_accX, 2);
+  let accelY2 = Math.pow(filtered_accY, 2);
+  let accel = accelX2 + accelY2;
+  let Test2 = document.getElementById("test2");
+  Test2.innerHTML = accel;
 }
   
 let is_running = false;
