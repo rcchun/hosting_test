@@ -148,7 +148,7 @@ function update_orientation(event) {
   Test.innerHTML = accel;
   let Test2 = document.getElementById("test2");
   
-  if (parseInt(Alpha.innerHTML) > 9.01) {
+  if (parseFloat(Alpha.innerHTML) > 9.01) {
     Test2.innerHTML = event.acceleration.x;
   }
 
