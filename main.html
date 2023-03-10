@@ -33,9 +33,9 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
 
 
   
@@ -68,6 +68,7 @@
   <li>X-axis: <span id="Gyroscope_x">0</span><span>&deg;/s</span></li>
   <li>Y-axis: <span id="Gyroscope_y">0</span><span>&deg;/s</span></li>
   <li>Z-axis: <span id="Gyroscope_z">0</span><span>&deg;/s</span></li>
+  <li>Z-axis: <span id="Ori_z">0</span><span>&deg;</span></li>
 </ul>
 
 </div>
@@ -115,6 +116,7 @@ function handleMotion(event) {
   updateFieldIfNotNull('Gyroscope_z', event.rotationRate.alpha);
   updateFieldIfNotNull('Gyroscope_x', event.rotationRate.beta);
   updateFieldIfNotNull('Gyroscope_y', event.rotationRate.gamma);
+  updateFieldIfNotNull('Ori_z', event.alpha);
   update_acceleration(event);
   incrementEventCount();
 }
@@ -145,8 +147,8 @@ function update_acceleration(event) {
   let accelX2 = Math.pow(filtered_accX, 2);
   let accelY2 = Math.pow(filtered_accY, 2);
   let accel = accelX2 + accelY2;
-  Alpha_0 += (event.rotationRate.alpha);
-  Alpha.innerHTML = Alpha_0;
+
+  Alpha.innerHTML = event.alpha;
   
   if (filtered_accX < -1 && filtered_accX > -7) {
     VelocityCount += (filtered_accX * 0.6);
