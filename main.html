@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
 
 
   
@@ -200,6 +200,7 @@ demo_button.onclick = function(e) {
     window.removeEventListener("devicemotion", handleMotion);
     window.removeEventListener("deviceorientation", handleOrientation);
     window.removeEventListener("devicemotion", update_orientation);
+    window.removeEventListener("deviceorientation", update_orientation);
     demo_button.innerHTML = "Start demo";
     demo_button.classList.add('btn-success');
     demo_button.classList.remove('btn-danger');
@@ -208,6 +209,7 @@ demo_button.onclick = function(e) {
     window.addEventListener("devicemotion", handleMotion);
     window.addEventListener("deviceorientation", handleOrientation);
     window.addEventListener("devicemotion", update_orientation);
+    window.addEventListener("deviceorientation", update_orientation);
     document.getElementById("start_demo").innerHTML = "Stop demo";
     demo_button.classList.remove('btn-success');
     demo_button.classList.add('btn-danger');
