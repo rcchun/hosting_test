@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
 <p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
@@ -136,7 +136,6 @@ function update_orientation(event) {
   let Test = document.getElementById("test");
   let Alpha2 = parseFloat(event.alpha)
   Alpha.innerHTML = Alpha2;
-  Test.innerHTML = event.rotationRate.alpha;
 
   let Distance_x = document.getElementById("distance_X");
   let Distance_y = document.getElementById("distance_Y");
@@ -146,10 +145,10 @@ function update_orientation(event) {
   let accelX2 = Math.pow(filtered_accX, 2);
   let accelY2 = Math.pow(filtered_accY, 2);
   let accel = accelX2 + accelY2;
+  Test.innerHTML = accel;
   let Test2 = document.getElementById("test2");
   if (Alpha2 > 0.01) {
-    Angle_alpha += filtered_alpha;
-    Test2.innerHTML = Angle_alpha;
+    Test2.innerHTML = Alpha2;
   }
 
   if (accel > 1) {
