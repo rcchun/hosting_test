@@ -33,9 +33,9 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">Accel_1: <span class="badge badge-warning" id="Accel">0</span></p>
+<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">Accel_0: <span class="badge badge-warning" id="Accel">0</span></p>
 
 
   
@@ -90,6 +90,7 @@ function handleOrientation(event) {
   updateFieldIfNotNull('Orientation_b', event.beta);
   updateFieldIfNotNull('Orientation_g', event.gamma);
   updateFieldIfNotNull('Accelerometer_xy', event.gamma);
+  update_acceleration(event);
   incrementEventCount();
 }
 
@@ -117,7 +118,6 @@ function handleMotion(event) {
   updateFieldIfNotNull('Gyroscope_z', event.rotationRate.alpha);
   updateFieldIfNotNull('Gyroscope_x', event.rotationRate.beta);
   updateFieldIfNotNull('Gyroscope_y', event.rotationRate.gamma);
-  update_acceleration(event);
   incrementEventCount();
 }
 
@@ -147,6 +147,30 @@ function update_acceleration(event) {
   let accelY2 = Math.pow(filtered_accY, 2);
   let accel = accelX2 + accelY2;
   Accel.innerHTML = event.alpha;
+  
+  if (filtered_accX < -1 && filtered_accX > -7) {
+    VelocityCount += (filtered_accX * 0.6);
+  } else {
+    VelocityCount = 0;
+  }
+  
+  if (filtered_accX > 1 && filtered_accX < 7) {
+    VelocityCount += (filtered_accX * 0.6);
+  } else {
+    VelocityCount = 0;
+  }
+  
+  if (filtered_accY < -1 && filtered_accY > -7) {
+    VelocityCountY += (filtered_accY * 0.6);
+  } else {
+    VelocityCountY = 0;
+  }
+  
+  if (filtered_accY > 1 && filtered_accY < 7) {
+    VelocityCountY += (filtered_accY * 0.6);
+  } else {
+    VelocityCountY = 0;
+  }
   
   DistanceCount += VelocityCount;
   DistanceCountY += VelocityCountY;  
