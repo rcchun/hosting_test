@@ -124,7 +124,6 @@ var VelocityCount = 0;
 var DistanceCount = 0;
 var VelocityCountY = 0;
 var DistanceCountY = 0;
-var Alpha_0 = 0;
 var kf = new KalmanFilter();
   
 function update_orientation(event) {
@@ -146,8 +145,8 @@ function update_orientation(event) {
   let Test2 = document.getElementById("test2");
   Test2.innerHTML = accel;
   
-  if (event.alpha < 10 || event.alpha > 350) {
-    VelocityCountY += (accel * 0.6);
+  if (event.alpha > 350) {
+    VelocityCountY += accel;
   }
   DistanceCount += VelocityCount;
   DistanceCountY += VelocityCountY;  
