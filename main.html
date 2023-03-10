@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
 
 
   
@@ -174,13 +174,6 @@ function update_acceleration(event) {
 }
 
 function update_orientation(event) {
-  let filtered_accX = kf.filter(event.acceleration.x);
-  let filtered_accY = kf.filter(event.acceleration.y);
-  
-  let accelX2 = Math.pow(filtered_accX, 2);
-  let accelY2 = Math.pow(filtered_accY, 2);
-  let accel = accelX2 + accelY2;  
-  
   let Ori_a = event.alpha;
   let Ori_b = event.beta;
   let Ori_g = event.gamma;
