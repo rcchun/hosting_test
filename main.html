@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
 <p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
@@ -124,6 +124,7 @@ var VelocityCount = 0;
 var DistanceCount = 0;
 var VelocityCountY = 0;
 var DistanceCountY = 0;
+var Angle_alpha = 0;
 var kf = new KalmanFilter();
   
 function update_orientation(event) {
@@ -134,21 +135,21 @@ function update_orientation(event) {
   let Alpha = document.getElementById("Alpha");
   let Test = document.getElementById("test");
   Alpha.innerHTML = Ori_a;
-  Test.innerHTML = event.acceleration.x;
+  Test.innerHTML = event.rotationRate.alpha;
 
   let Distance_x = document.getElementById("distance_X");
   let Distance_y = document.getElementById("distance_Y");
   let filtered_accX = kf.filter(event.acceleration.x);
   let filtered_accY = kf.filter(event.acceleration.y);
-  let filtered_alpha = kf.filter(event.alpha);
+  let filtered_alpha = kf.filter(event.rotationRate.alpha);
   let accelX2 = Math.pow(filtered_accX, 2);
   let accelY2 = Math.pow(filtered_accY, 2);
   let accel = accelX2 + accelY2;
   let Test2 = document.getElementById("test2");
-  let filtered_alpha2 = Math.abs(filtered_alpha);
-  if (filtered_alpha2 < 9.0) {
-    Test2.innerHTML = accel;
-  }
+
+  Angle_alpha += filtered_alpha;
+  Test2.innerHTML = Angle_alpha;
+
   if (accel > 1) {
     VelocityCountY += (accel * 0.1);
   } else {
