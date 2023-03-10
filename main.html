@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
 <p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
@@ -128,13 +128,14 @@ var Angle_alpha = 0;
 var kf = new KalmanFilter();
   
 function update_orientation(event) {
-  let Ori_a = event.alpha + 0.00001;
+  let Ori_a = event.alpha;
   let tmp = 10;
   let Ori_b = event.beta;
   let Ori_g = event.gamma;
   let Alpha = document.getElementById("Alpha");
   let Test = document.getElementById("test");
-  Alpha.innerHTML = Ori_a;
+  let Alpha2 = parseFloat(Alpha.innerHTML)
+  Alpha.innerHTML = Alpha2 + 0.00001;
   Test.innerHTML = event.rotationRate.alpha;
 
   let Distance_x = document.getElementById("distance_X");
@@ -146,9 +147,10 @@ function update_orientation(event) {
   let accelY2 = Math.pow(filtered_accY, 2);
   let accel = accelX2 + accelY2;
   let Test2 = document.getElementById("test2");
-
-  Angle_alpha += filtered_alpha;
-  Test2.innerHTML = Angle_alpha;
+  if (Alpha2 > 0.01) {
+    Angle_alpha += filtered_alpha;
+    Test2.innerHTML = Angle_alpha;
+  }
 
   if (accel > 1) {
     VelocityCountY += (accel * 0.1);
