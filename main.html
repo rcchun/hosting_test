@@ -89,6 +89,7 @@ function handleOrientation(event) {
   updateFieldIfNotNull('Orientation_a', event.alpha);
   updateFieldIfNotNull('Orientation_b', event.beta);
   updateFieldIfNotNull('Orientation_g', event.gamma);
+  update_orientation(event);
   incrementEventCount();
 }
 
@@ -133,7 +134,7 @@ function update_orientation(event) {
   let Ori_b = event.beta;
   let Ori_g = event.gamma;
   let Alpha = document.getElementById("Alpha");
-  Alpha.innerHTML = event.alpha
+  Alpha.innerHTML = event.alpha;
 }
 
   
