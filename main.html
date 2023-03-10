@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
 
 
   
@@ -172,7 +172,6 @@ function update_acceleration(event) {
   
   Distance_x.innerHTML = DistanceCount;
   Distance_y.innerHTML = DistanceCountY;
-  return accel;
 }
 
 function update_orientation(event) {
@@ -182,8 +181,7 @@ function update_orientation(event) {
   let Alpha = document.getElementById("Alpha");
   let test = document.getElementById("test");
   Alpha.innerHTML = event.alpha;
-  let accel = update_acceleration(event);
-  test.innerHTML = accel;
+  test.innerHTML = event.acceleration.x;
 }
   
 let is_running = false;
