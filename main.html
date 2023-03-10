@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
 <p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
@@ -127,12 +127,12 @@ var DistanceCountY = 0;
 var kf = new KalmanFilter();
   
 function update_orientation(event) {
-  let Ori_a = event.alpha;
+  let Ori_a = event.alpha + 1000;
   let Ori_b = event.beta;
   let Ori_g = event.gamma;
   let Alpha = document.getElementById("Alpha");
   let Test = document.getElementById("test");
-  Alpha.innerHTML = event.alpha;
+  Alpha.innerHTML = Ori_a;
   Test.innerHTML = event.acceleration.x;
   
   let Distance_x = document.getElementById("distance_X");
