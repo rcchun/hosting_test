@@ -33,9 +33,9 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
 
 
   
@@ -118,18 +118,26 @@ function handleMotion(event) {
   incrementEventCount();
 }
 
+function update_orientation(event) {
+  let Ori_a = event.alpha;
+  let Ori_b = event.beta;
+  let Ori_g = event.gamma;
+  return event.alpha;
+}
+  
 var VelocityCount = 0;
 var DistanceCount = 0;
 var VelocityCountY = 0;
 var DistanceCountY = 0;
 var Alpha_0 = 0;
 var kf = new KalmanFilter();
-
   
 function update_acceleration(event) {
   let Distance_x = document.getElementById("distance_X");
   let Distance_y = document.getElementById("distance_Y");
   let Alpha = document.getElementById("Alpha");
+  
+  let ori_a = update_orientation(event)
   
   let Gyro_z = event.rotationRate.alpha;
   let Gyro_x = event.rotationRate.beta;
@@ -142,7 +150,7 @@ function update_acceleration(event) {
   let accelY2 = Math.pow(filtered_accY, 2);
   let accel = accelX2 + accelY2;
   
-  Alpha.innerHTML = event.alpha;
+  Alpha.innerHTML = ori_a;
   
   if (filtered_accX < -1 && filtered_accX > -7) {
     VelocityCount += (filtered_accX * 0.6);
