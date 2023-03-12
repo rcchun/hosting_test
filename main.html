@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
 <p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
@@ -130,7 +130,8 @@ var kf = new KalmanFilter();
 function update_orientation(event) {
   let Alpha = document.getElementById("Alpha");
   let Test = document.getElementById("test");
-  let Alpha2 = parseFloat(event.alpha)
+  let Alpha2 = parseFloat(event.alpha);
+  let tmp = 10;
   Alpha.innerHTML = Alpha2;
 
   let Distance_x = document.getElementById("distance_X");
@@ -146,8 +147,10 @@ function update_orientation(event) {
   let regularY = filtered_accY / accelY;
   let accel = Math.sqrt(accelX2 + accelY2);
   let Test2 = document.getElementById("test2");
-  Test.innerHTML = regularX;
-  Test2.innerHTML = regularY;
+  if (Alpha2 > tmp) {
+    Test.innerHTML = regularX;
+    Test2.innerHTML = regularY;
+  }
   if (filtered_alpha > 5 || filtered_alpha < -5) {
     Angle_alpha += filtered_alpha;
   }
