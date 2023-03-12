@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
 <p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
@@ -131,7 +131,7 @@ function update_orientation(event) {
   let Alpha = document.getElementById("Alpha");
   let Test = document.getElementById("test");
   let Alpha2 = parseFloat(event.alpha);
-  let tmp = 10;
+  let tmp = "10";
   Alpha.innerHTML = Alpha2;
 
   let Distance_x = document.getElementById("distance_X");
@@ -145,7 +145,7 @@ function update_orientation(event) {
   let accelY = Math.sqrt(accelY2);
   let regularX = filtered_accX / accelX;
   let regularY = filtered_accY / accelY;
-  let accel = Math.sqrt(accelX2 + accelY2);
+  let accel = accelX + accelY;
   let Test2 = document.getElementById("test2");
   if (Alpha2 > tmp) {
     Test.innerHTML = regularX;
@@ -155,7 +155,7 @@ function update_orientation(event) {
     Angle_alpha += filtered_alpha;
   }
   
-  if (accel > 5) {
+  if (accel > 10) {
     VelocityCountY += (accel * 0.01);
   } else {
     VelocityCountY = 0
