@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
 <p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
@@ -85,7 +85,10 @@
 <script src="dist/LPF.js"></script>
   
 <script>
-
+let accelerationIncludingGravityZ = 0;
+let accelerationX = 0;
+let accelerationY = 0;
+let accelerationZ = 0;
 function handleOrientation(event) {
   updateFieldIfNotNull('Orientation_a', event.alpha);
   updateFieldIfNotNull('Orientation_b', event.beta);
@@ -104,6 +107,13 @@ function updateFieldIfNotNull(fieldName, value, precision=10){
     document.getElementById(fieldName).innerHTML = value.toFixed(precision);
 }
 
+function addLog(logText) {
+  const body = document.querySelector("body");
+  const div = document.createElement("div");
+  div.appendChild(document.createTextNode(logText));
+  body.appendChild(div);
+}
+  
 function handleMotion(event) {  
   updateFieldIfNotNull('Accelerometer_gx', event.accelerationIncludingGravity.x);
   updateFieldIfNotNull('Accelerometer_gy', event.accelerationIncludingGravity.y);
@@ -117,6 +127,10 @@ function handleMotion(event) {
   updateFieldIfNotNull('Gyroscope_z', event.rotationRate.alpha);
   updateFieldIfNotNull('Gyroscope_x', event.rotationRate.beta);
   updateFieldIfNotNull('Gyroscope_y', event.rotationRate.gamma);
+  let accelerationIncludingGravityZ = event.accelerationIncludingGravity.z;
+  let accelerationX = event.acceleration.x;
+  let accelerationY = event.acceleration.y;
+  let accelerationZ = event.acceleration.z;
   incrementEventCount();
 }
   
@@ -204,6 +218,16 @@ demo_button.onclick = function(e) {
     demo_button.classList.add('btn-danger');
     is_running = true;
   }
+  setInterval(() => {
+    addLog(
+      JSON.stringify({
+        accelerationIncludingGravityZ,
+        accelerationX,
+        accelerationY,
+        accelerationZ,
+      })
+    );
+  }, 1000);
 };
 
 /*
