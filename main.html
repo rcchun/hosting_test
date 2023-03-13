@@ -132,9 +132,6 @@ function update_orientation(event) {
   let Test = document.getElementById("test");
   let Alpha2 = parseFloat(event.alpha);
   let tmp = "10";
-  if ((Alpha2 + 0.00001) > 10) {
-    Alpha.innerHTML = Alpha2;
-  }
 
   let Distance_x = document.getElementById("distance_X");
   let Distance_y = document.getElementById("distance_Y");
@@ -150,8 +147,11 @@ function update_orientation(event) {
   let accel = accelX + accelY;
   let Test2 = document.getElementById("test2");
   
-  if ((Alpha2 + 0.00001) < 10 || (Alpha2 + 0.00001) > 350) {
+  if ((Alpha2 + 0.00001) > 10) {
+    Alpha.innerHTML = Alpha2;
     Test.innerHTML = accel;
+  }
+  if ((Alpha2 + 0.00001) < 10 || (Alpha2 + 0.00001) > 350) {
     if (accel > 10) {
       VelocityCountY += (accel * 0.01);
     } else {
