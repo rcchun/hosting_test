@@ -136,7 +136,12 @@ function update_orientation(event) {
   if ((Alpha2 + 0.00001) < 10 || (Alpha2 + 0.00001) > 350) {
     Alpha.innerHTML = Alpha2;
     orient = Alpha2;
-  }  
+  }
+  
+  if ((Alpha2 + 0.00001) >160 && (Alpha2 + 0.00001) > 200) {
+    Alpha.innerHTML = Alpha2;
+    orient = Alpha2;
+  } 
   
   let Distance_x = document.getElementById("distance_X");
   let Distance_y = document.getElementById("distance_Y");
@@ -160,6 +165,15 @@ function update_orientation(event) {
       VelocityCountY = 0;
     }
   }
+
+  if (orient > 160 && orient < 200) {
+    Test.innerHTML = accel;
+    if (accel > 10) {
+      VelocityCountY -= (accel * 0.01);
+    } else {
+      VelocityCountY = 0;
+    }
+  }  
   
   if (filtered_alpha > 5 || filtered_alpha < -5) {
     Angle_alpha += filtered_alpha;
