@@ -131,16 +131,17 @@ function update_orientation(event) {
   let Alpha = document.getElementById("Alpha");
   let Test = document.getElementById("test");
   let Alpha2 = parseFloat(event.alpha);
-  let tmp = "10";
+  let orient = 0;
+  
+  if ((Alpha2 + 0.00001) > 10) {
+    Alpha.innerHTML = Alpha2;
+    let orient = Alpha2;
+  }  
   
   let Distance_x = document.getElementById("distance_X");
   let Distance_y = document.getElementById("distance_Y");
   let filtered_accX = kf.filter(event.acceleration.x);
   let filtered_accY = kf.filter(event.acceleration.y);  
-  
-  if ((Alpha2 + 0.00001) > 10) {
-    Alpha.innerHTML = Alpha2;
-  }  
   
   let filtered_alpha = kf.filter(event.rotationRate.alpha);
   let accelX2 = Math.pow(filtered_accX, 2);
@@ -151,7 +152,7 @@ function update_orientation(event) {
   
   let Test2 = document.getElementById("test2");
   
-  if ((Alpha2 + 0.00001) > 10) {
+  if (orient > 10) {
     Test.innerHTML = accel;
   }
 
