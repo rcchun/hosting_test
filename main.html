@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
 <p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
@@ -111,10 +111,10 @@ function addLog(logText) {
   body.appendChild(div);
 }
 
-var accelerationIncludingGravityZ = 0;
-var accelerationX = 0;
-var accelerationY = 0;
-var accelerationZ = 0;
+let accelerationIncludingGravityZ = 0;
+let accelerationX = 0;
+let accelerationY = 0;
+let accelerationZ = 0;
   
 function handleMotion(event) {  
   updateFieldIfNotNull('Accelerometer_gx', event.accelerationIncludingGravity.x);
