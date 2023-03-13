@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
 <p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
@@ -151,9 +151,9 @@ function update_orientation(event) {
   let Test2 = document.getElementById("test2");
   
   if (orient < 10 || orient > 350) {
-    Test.innerHTML = accel;
-    if (accel > 10) {
-      VelocityCountY += (accel * 0.01);
+    Test.innerHTML = filtered_accY;
+    if (filtered_accY > 1) {
+      VelocityCountY += (filtered_accY * 0.01);
     } else {
       VelocityCountY = 0;
     }
@@ -161,9 +161,9 @@ function update_orientation(event) {
   }
 
   if (orient > 160 && orient < 200) {
-    Test.innerHTML = accel;
-    if (accel > 10) {
-      VelocityCountY -= (accel * 0.01);
+    Test.innerHTML = filtered_accY;
+    if (filtered_accY < -1) {
+      VelocityCountY += (filtered_accY * 0.01);
     } else {
       VelocityCountY = 0;
     }
