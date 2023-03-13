@@ -151,15 +151,16 @@ function update_orientation(event) {
   let accel = accelX + accelY;
   let Test2 = document.getElementById("test2");
   
-  if ((Alpha2 + 0.00001) < 10) {
+  if ((Alpha2 + 0.00001) > 10) {
     Test.innerHTML = accel;
-    if (accel > 10) {
-      VelocityCountY += (accel * 0.01);
-    } else {
-      VelocityCountY = 0;
-    }    
   }
 
+  if (accel > 10) {
+    VelocityCountY += (accel * 0.01);
+  } else {
+    VelocityCountY = 0;
+  } 
+  
   if (filtered_alpha > 5 || filtered_alpha < -5) {
     Angle_alpha += filtered_alpha;
   }
