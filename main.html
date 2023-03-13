@@ -111,10 +111,10 @@ function addLog(logText) {
   body.appendChild(div);
 }
 
-let accelerationIncludingGravityZ = 0;
-let accelerationX = 0;
-let accelerationY = 0;
-let accelerationZ = 0;
+var accelerationIncludingGravityZ = 0;
+var accelerationX = 0;
+var accelerationY = 0;
+var accelerationZ = 0;
   
 function handleMotion(event) {  
   updateFieldIfNotNull('Accelerometer_gx', event.accelerationIncludingGravity.x);
@@ -130,10 +130,10 @@ function handleMotion(event) {
   updateFieldIfNotNull('Gyroscope_x', event.rotationRate.beta);
   updateFieldIfNotNull('Gyroscope_y', event.rotationRate.gamma);
   
-  let accelerationIncludingGravityZ = event.accelerationIncludingGravity.z;
-  let accelerationX = event.acceleration.x;
-  let accelerationY = event.acceleration.y;
-  let accelerationZ = event.acceleration.z;
+  accelerationIncludingGravityZ = event.accelerationIncludingGravity.z;
+  accelerationX = event.acceleration.x;
+  accelerationY = event.acceleration.y;
+  accelerationZ = event.acceleration.z;
   
   incrementEventCount();
 }
