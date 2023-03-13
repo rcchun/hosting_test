@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
 <p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
@@ -149,17 +149,21 @@ function update_orientation(event) {
   let regularY = filtered_accY / accelY;
   let accel = accelX + accelY;
   let Test2 = document.getElementById("test2");
-
-  Test.innerHTML = accel;  
+  
+  if ((Alpha2 + 0.00001) < 10 || (Alpha2 + 0.00001) > 350) {
+    Test.innerHTML = accel;
+    if (accel > 10) {
+      VelocityCountY += (accel * 0.01);
+    } else {
+      VelocityCountY = 0;
+    }
+  }
+    
   if (filtered_alpha > 5 || filtered_alpha < -5) {
     Angle_alpha += filtered_alpha;
   }
   Test2.innerHTML = Angle_alpha;
-  if (accel > 10) {
-    VelocityCountY += (accel * 0.01);
-  } else {
-    VelocityCountY = 0
-  }
+
   DistanceCount += VelocityCount;
   DistanceCountY += VelocityCountY;  
   Distance_x.innerHTML = DistanceCount;
