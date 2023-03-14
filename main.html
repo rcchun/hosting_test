@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
 <p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
@@ -179,7 +179,7 @@ function update_orientation(event) {
     }
   }
 
-  if (orient < 10 || orient > 350) {
+  if (orient < 10) {
     Test.innerHTML = filtered_accY;
     if (filtered_accY > 0.8 && filtered_accY < 2.8) {
       VelocityCountY += (filtered_accY * 0.02);
@@ -187,6 +187,15 @@ function update_orientation(event) {
       VelocityCountY = 0;
     }
   }
+  
+  if (orient > 350) {
+    Test.innerHTML = filtered_accY;
+    if (filtered_accY > 0.8 && filtered_accY < 2.8) {
+      VelocityCountY += (filtered_accY * 0.02);
+    } else {
+      VelocityCountY = 0;
+    }
+  }  
 
   if (orient > 260 && orient < 280) {
     Test2.innerHTML = filtered_accX;
