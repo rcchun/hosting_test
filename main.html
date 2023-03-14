@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
 <p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
@@ -169,24 +169,41 @@ function update_orientation(event) {
   let accel = accelX + accelY;
   
   let Test2 = document.getElementById("test2");
-  
-  if (orient < 10 || orient > 350) {
+ 
+  if (orient > 160 && orient < 200) {
     Test.innerHTML = filtered_accY;
-    if (filtered_accY > 1 && filtered_accY < 7) {
+    if (filtered_accY < -1 && filtered_accY > -3) {
       VelocityCountY += (filtered_accY * 0.02);
     } else {
       VelocityCountY = 0;
     }
   }
 
-  if (orient > 160 && orient < 200) {
+  if (orient < 10 || orient > 350) {
     Test.innerHTML = filtered_accY;
-    if (filtered_accY < -1 && filtered_accY > -7) {
+    if (filtered_accY > 1 && filtered_accY < 3) {
       VelocityCountY += (filtered_accY * 0.02);
     } else {
       VelocityCountY = 0;
     }
+  }
 
+  if (orient > 240 && orient < 280) {
+    Test2.innerHTML = filtered_accX;
+    if (filtered_accX > 1 && filtered_accX < 3) {
+      VelocityCount += (filtered_accX * 0.02);
+    } else {
+      VelocityCount = 0;
+    }
+  }
+
+  if (orient > 160 && orient < 200) {
+    Test2.innerHTML = filtered_accX;
+    if (filtered_accX < -1 && filtered_accX > -3) {
+      VelocityCount += (filtered_accX * 0.02);
+    } else {
+      VelocityCount = 0;
+    }
   }
   
   DistanceCount += VelocityCount;
