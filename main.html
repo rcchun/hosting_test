@@ -139,7 +139,7 @@ function handleMotion(event) {
     
   incrementEventCount();
 }
-  
+
 var VelocityCount = 0;
 var DistanceCount = 0;
 var VelocityCountY = 0;
@@ -147,7 +147,7 @@ var DistanceCountY = 0;
 var Angle_alpha = 0;
 var orient = 0;
 var kf = new KalmanFilter();
-  
+
 function update_orientation(event) {
   let Alpha = document.getElementById("Alpha");
   let Test = document.getElementById("test");
@@ -172,7 +172,7 @@ function update_orientation(event) {
  
   if (orient > 160 && orient < 200) {
     Test.innerHTML = filtered_accY;
-    if (filtered_accY < -1 && filtered_accY > -1.5) {
+    if (filtered_accY < -1 && filtered_accY > -2.5) {
       VelocityCountY += (filtered_accY * 0.02);
     } else {
       VelocityCountY = 0;
@@ -181,7 +181,7 @@ function update_orientation(event) {
 
   if (orient < 10 || orient > 350) {
     Test.innerHTML = filtered_accY;
-    if (filtered_accY > 1 && filtered_accY < 1.5) {
+    if (filtered_accY > 1 && filtered_accY < 2.5) {
       VelocityCountY += (filtered_accY * 0.02);
     } else {
       VelocityCountY = 0;
@@ -190,7 +190,7 @@ function update_orientation(event) {
 
   if (orient > 240 && orient < 280) {
     Test2.innerHTML = filtered_accX;
-    if (filtered_accX > 1 && filtered_accX < 1.5) {
+    if (filtered_accX > 1 && filtered_accX < 2.5) {
       VelocityCount += (filtered_accX * 0.02);
     } else {
       VelocityCount = 0;
@@ -199,7 +199,7 @@ function update_orientation(event) {
 
   if (orient > 70 && orient < 100) {
     Test2.innerHTML = filtered_accX;
-    if (filtered_accX < -1 && filtered_accX > -1.5) {
+    if (filtered_accX < -1 && filtered_accX > -2.5) {
       VelocityCount += (filtered_accX * 0.02);
     } else {
       VelocityCount = 0;
@@ -255,17 +255,19 @@ demo_button.onclick = function(e) {
     setInterval(() => {
         addLog(
             JSON.stringify({
-                accelerationIncludingGravityZ,
                 accelerationX,
                 accelerationY,
                 accelerationZ,
+                DistanceCount,
+                DistanceCountY,              
             })
         );
         logs.push({
-                accelerationIncludingGravityZ,
                 accelerationX,
                 accelerationY,
                 accelerationZ,
+                DistanceCount,
+                DistanceCountY,
             })
         window.localStorage.setItem("logs", JSON.stringify(logs))
     }, 100);
