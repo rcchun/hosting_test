@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
 <p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
@@ -172,6 +172,7 @@ function update_orientation(event) {
  
   if (orient > 170 && orient < 190) {
     Test.innerHTML = filtered_accY;
+    VelocityCount = 0;
     if (filtered_accY < -0.8 && filtered_accY > -2.8) {
       VelocityCountY += (filtered_accY * 0.02);
     } else {
@@ -181,6 +182,7 @@ function update_orientation(event) {
 
   if (orient < 10) {
     Test.innerHTML = filtered_accY;
+    VelocityCount = 0;
     if (filtered_accY > 0.8 && filtered_accY < 2.8) {
       VelocityCountY += (filtered_accY * 0.02);
     } else {
@@ -190,6 +192,7 @@ function update_orientation(event) {
   
   if (orient > 350) {
     Test.innerHTML = filtered_accY;
+    VelocityCount = 0;
     if (filtered_accY > 0.8 && filtered_accY < 2.8) {
       VelocityCountY += (filtered_accY * 0.02);
     } else {
@@ -199,6 +202,7 @@ function update_orientation(event) {
 
   if (orient > 260 && orient < 280) {
     Test2.innerHTML = filtered_accX;
+    VelocityCountY = 0;
     if (filtered_accX > 0.8 && filtered_accX < 2.8) {
       VelocityCount += (filtered_accX * 0.02);
     } else {
@@ -208,6 +212,7 @@ function update_orientation(event) {
 
   if (orient > 80 && orient < 100) {
     Test2.innerHTML = filtered_accX;
+    VelocityCountY = 0;
     if (filtered_accX < -0.8 && filtered_accX > -2.8) {
       VelocityCount += (filtered_accX * 0.02);
     } else {
