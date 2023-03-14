@@ -33,10 +33,10 @@
   
   
   
-<p style="margin-top:1rem;">X-Distance_1: <span class="badge badge-warning" id="distance_X">0</span></p>
-<p style="margin-top:1rem;">Y-Distance_1: <span class="badge badge-warning" id="distance_Y">0</span></p>
-<p style="margin-top:1rem;">alpha_1: <span class="badge badge-warning" id="Alpha">0</span></p>
-<p style="margin-top:1rem;">test_1: <span class="badge badge-warning" id="test">0</span></p>
+<p style="margin-top:1rem;">X-Distance_0: <span class="badge badge-warning" id="distance_X">0</span></p>
+<p style="margin-top:1rem;">Y-Distance_0: <span class="badge badge-warning" id="distance_Y">0</span></p>
+<p style="margin-top:1rem;">alpha_0: <span class="badge badge-warning" id="Alpha">0</span></p>
+<p style="margin-top:1rem;">test_0: <span class="badge badge-warning" id="test">0</span></p>
 <p style="margin-top:1rem;">test_2: <span class="badge badge-warning" id="test2">0</span></p>
 
 
@@ -115,6 +115,8 @@ var accelerationIncludingGravityZ = 0;
 var accelerationX = 0;
 var accelerationY = 0;
 var accelerationZ = 0;
+
+const logs = [];
   
 function handleMotion(event) {  
   updateFieldIfNotNull('Accelerometer_gx', event.accelerationIncludingGravity.x);
@@ -134,7 +136,7 @@ function handleMotion(event) {
   accelerationX = event.acceleration.x;
   accelerationY = event.acceleration.y;
   accelerationZ = event.acceleration.z;
-  
+    
   incrementEventCount();
 }
   
@@ -170,22 +172,37 @@ function update_orientation(event) {
   
   if (orient < 10 || orient > 350) {
     Test.innerHTML = filtered_accY;
-    if (filtered_accY > 1.8) {
-      DistanceCountY += (0.65);
+    if (filtered_accY < -1 && filtered_accY > -7) {
+      VelocityCountY += (filtered_accY * 0.6);
     } else {
-      DistanceCountY += 0;
+      VelocityCountY = 0;
+    }
+
+    if (filtered_accY > 1 && filtered_accY < 7) {
+      VelocityCountY += (filtered_accY * 0.6);
+    } else {
+      VelocityCountY = 0;
     }
   }
 
   if (orient > 160 && orient < 200) {
     Test.innerHTML = filtered_accY;
-    if (filtered_accY < -1.8) {
-      DistanceCountY -= (0.65);
+    if (filtered_accY < -1 && filtered_accY > -7) {
+      VelocityCountY += (filtered_accY * 0.6);
     } else {
-      DistanceCountY -= 0;
+      VelocityCountY = 0;
     }
-  }  
- 
+
+    if (filtered_accY > 1 && filtered_accY < 7) {
+      VelocityCountY += (filtered_accY * 0.6);
+    } else {
+      VelocityCountY = 0;
+    }
+  }
+  
+  DistanceCount += VelocityCount;
+  DistanceCountY += VelocityCountY;
+  
   Distance_x.innerHTML = DistanceCount;
   Distance_y.innerHTML = DistanceCountY;  
 }
@@ -212,6 +229,12 @@ demo_button.onclick = function(e) {
     demo_button.classList.add('btn-success');
     demo_button.classList.remove('btn-danger');
     is_running = false;
+    
+    if(!is_running) {
+      const data = JSON.parse(window.localStorage.getItem("logs"));
+      console.log("logs", data)
+    }
+    
   }else{
     window.addEventListener("devicemotion", handleMotion);
     window.addEventListener("deviceorientation", handleOrientation);
@@ -221,17 +244,27 @@ demo_button.onclick = function(e) {
     demo_button.classList.remove('btn-success');
     demo_button.classList.add('btn-danger');
     is_running = true;
+    
+    if(is_running) {
+    setInterval(() => {
+        addLog(
+            JSON.stringify({
+                accelerationIncludingGravityZ,
+                accelerationX,
+                accelerationY,
+                accelerationZ,
+            })
+        );
+        logs.push({
+                accelerationIncludingGravityZ,
+                accelerationX,
+                accelerationY,
+                accelerationZ,
+            })
+        window.localStorage.setItem("logs", JSON.stringify(logs))
+    }, 1000);
   }
-  setInterval(() => {
-    addLog(
-      JSON.stringify({
-        accelerationIncludingGravityZ,
-        accelerationX,
-        accelerationY,
-        accelerationZ,
-      })
-    );
-  }, 1);
+  }
 };
 
 /*
